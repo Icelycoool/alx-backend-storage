@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""lists_all_documents"""
+"""lists_all"""
 
 
 def list_all(mongo_collection):
