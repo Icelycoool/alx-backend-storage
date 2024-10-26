@@ -20,7 +20,9 @@ method_counts = {
     }
 
 # Status count for GET method
-get_status_count = log_collection.count_documents({"method": "GET", "path": "/status"})
+get_status_count = log_collection.count_documents({
+    "method": "GET", "path": "/status"
+    })
 
 # Display information
 print(f"{total_logs} logs")
