@@ -7,7 +7,7 @@ from pymongo import MongoClient
 def stats_log():
     """Displays some stats abount Nginx logs stored in MongoDB"""
     # Connect to the client
-    client = MongoClient('mongodb://localhost:27017')
+    client = MongoClient('mongodb://127.0.0.1:27017')
 
     # Access the logs
     log_collection = client.logs.nginx
@@ -33,6 +33,9 @@ def stats_log():
     for method in methods:
         print(f"\tmethod {method}: {method_counts[method]}")
     print(f"{get_status_count} status check")
+
+    # Close the MongoDB connection
+    client.close()
 
 
 if __name__ == "__main__":
