@@ -20,12 +20,12 @@ def stats_log():
     method_counts = {
         method: log_collection.count_documents({
             "method": method}) for method in methods
-        }
+    }
 
     # Status count for GET method
     get_status_count = log_collection.count_documents({
         "method": "GET", "path": "/status"
-        })
+    })
 
     # Display information
     print(f"{total_logs} logs")
@@ -36,3 +36,7 @@ def stats_log():
 
     # Close the MongoDB connection
     client.close()
+
+
+if __name__ == "__main__":
+    stats_log()
