@@ -31,11 +31,8 @@ def stats_log():
     print(f"{total_logs} logs")
     print("Methods:")
     for method in methods:
-        print(f"\tmethod {method}: {method_counts[method]}")
+        print(f"    method {method}: {method_counts[method]}")
     print(f"{get_status_count} status check")
-
-    # Close the MongoDB connection
-    client.close()
 
 
 if __name__ == "__main__":
