@@ -5,5 +5,19 @@
 def top_students(mongo_collection):
     """returns all students soretd by average score"""
     students = mongo_collection.find()
-    sorted_students = sorted(students, key=lambda student: student['average_score'], reverse=True)
-    return sorted_students
+
+    results = []
+
+    for student in students:
+        scores = [topic['score'] for topic in student.get('topics', [])]
+        average_score = sum(scores) / len(scores) if scores else 0
+        student_with_average = {
+            '_id': student['_id'],
+            'name': student['name'],
+            'average_score': average_score,
+        }
+        results.append(student_with_average)
+    
+    results.sort(key=lambda x: x['avaerageScore'], reverse=True)
+
+    return results
