@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" Web file """
+""" Web file"""
 import redis
 import requests
 from functools import wraps
@@ -17,7 +17,7 @@ def track_get_page(fn: Callable) -> Callable:
         if cached_page:
             return cached_page.decode('utf-8')
         response = fn(url)
-        client.set(f'{url}', response, 10)
+        client.setex(f'{url}', response, 10)
         return response
     return wrapper
 
