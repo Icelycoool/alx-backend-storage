@@ -21,7 +21,7 @@ def track_get_page(fn: Callable) -> Callable:
         return response
     return wrapper
 
-
+@track_get_page
 def get_page(url: str) -> str:
     """"Makes request to a particular url and gets the HTML content"""
     resposne = requests.get(url)
