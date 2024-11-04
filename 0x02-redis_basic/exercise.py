@@ -2,7 +2,7 @@
 """Cache file"""
 import redis
 import uuid
-from typing import Union
+from typing import Union, Optional, Callable, Any
 
 
 class Cache:
@@ -19,13 +19,24 @@ class Cache:
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """
         Stores data in the cache and returns a unique key.
-
-        Args:
-            data (Union[str, bytes, int, float]): The data to be stored.
-
-        Returns:
-            str: The unique key assigned to the stored data.
         """
         key = str(uuid.uuid4())
         self._redis.set(key, data)
         return key
+
+    def get(self, key: str, fn: Optional[Callable] = None) -> Any:
+        """Retrieves data from the Cache using the given key"""
+        value = self._redis.get(key)
+        if value is None:
+            return None
+        if fn:
+            return fn(value)
+        return value
+
+    def get_str(self, data: bytes) -> str:
+        """Coverts data to strings"""
+        return data.decode('utf-8')
+
+    def get_int(self, data: bytes) -> int:
+        """Converts data to integers"""
+        return int(data)
