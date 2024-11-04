@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Web file"""
+""" Web file """
 import redis
 import requests
 from functools import wraps
@@ -24,6 +24,6 @@ def track_get_page(fn: Callable) -> Callable:
 
 @track_get_page
 def get_page(url: str) -> str:
-    """"Makes request to a particular url and gets the HTML content"""
+    """ Makes a http request to a given endpoint"""
     response = requests.get(url)
     return response.text
